@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'teaspoon-jasmine'
+  gem 'phantomjs'
 end
 
 group :development do
@@ -55,6 +57,13 @@ gem 'angular-rails-templates'
 gem "bower-rails", "~> 0.11.0"
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem "foreman"
+
+gem 'devise'
+gem 'slim-rails'
+
+gem 'font-awesome-sass'
+gem 'bootstrap-sass'
+
 
 group :production do
   gem "rails_12factor"

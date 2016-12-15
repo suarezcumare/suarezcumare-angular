@@ -5,6 +5,9 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'rspec/autorun'
+require 'capybara/rails'
+require 'database_cleaner'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -54,4 +57,30 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with :truncation
+    DatabaseCleaner.clean_with :transaction
+  end
+
+  config.after(:each) do
+    ActionMailer::Base.deliveries.clear
+  end
+
+  config.around(:each, type: :feature, js: true) do |ex|
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+    self.use_transactional_fixtures = false
+    ex.run
+    self.use_transactional_fixtures = true
+    DatabaseCleaner.clean
+  end
+
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.infer_base_class_for_anonymous_controllers = false
+  config.order = "random"
 end

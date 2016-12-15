@@ -18,3 +18,5 @@
 //= require angular-ui-router
 //= require turbolinks
 //= require_tree .
+
+//= require bootstrap-sprockets
