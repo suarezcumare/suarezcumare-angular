@@ -42,11 +42,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem "rspec-rails", "~> 2.0"
-  gem "factory_girl_rails", "~> 4.0"
-  gem "capybara"
-  gem "database_cleaner"
-  gem "selenium-webdriver"
+  gem 'better_errors'
+  gem "letter_opener"
+  
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -62,4 +60,18 @@ group :production do
   gem "rails_12factor"
   gem "rails_stdout_logging"
   gem "rails_serve_static_assets"
+end
+
+group :test do
+  gem 'rspec-core', '~> 3.5.0'
+  gem 'rspec-rails', '~> 3.5'
+  gem "factory_girl_rails", "~> 4.0"
+  gem "capybara"
+  gem "database_cleaner"
+  gem "selenium-webdriver"
+  gem 'faker'
+  gem 'rspec-autotest'
+  gem 'cucumber-rails', require: false
+  gem 'poltergeist'
+  gem 'capybara-screenshot'
 end
